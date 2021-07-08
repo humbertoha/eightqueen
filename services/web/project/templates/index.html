@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Eight Queens</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<style type="text/css">
+    body{
+        background: #ddd;
+    }
+ 
+    .chessboard {
+        display: inline-block;
+    }
+     
+    div {
+    }
+ 
+    span {
+        display: inline-block;
+        width: 70px;
+        height: 70px;
+    }
+ 
+    .black {
+        background: black;
+    }
+ 
+    .white {
+        background: white;
+    }
+</style>
+<body>
+    <form id="formularioenviar">
+      <label for="numero de reinas">Numero de reinas :</label>
+      <input type="text" id="numerodereina" name="numerodereina">
+      <input type="submit" id="envio">
+    </form>
+    <div id="respuesta">
+        
+    </div>
+    <div id="graficas">
+        
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $("#envio").on("click",function(e){
+        event.preventDefault();
+        $("#respuesta").html("");
+        $("#graficas").html("");
+        $.ajax({
+            url: "eight",
+            type: "post",
+            data: { numerodereina : $("#numerodereina").val()} ,
+            success: function (response) {
+                console.log(response);
+                if(response.status == false){
+                    alert(response.mensaje);
+                }
+                if(response.status == true){
+                    let peticion = $("#numerodereina").val();
+                    $("#respuesta").html("<p>Tablero :"+peticion+" x "+peticion+"</p><p>Total campos:"+(peticion*peticion)+"</p><p>Numero de reinas(piezas de ajedrez):"+$("#numerodereina").val()+"</p></br><p>Numero de soluciones:"+response.total+"</p></br>")
+                    $("#graficas").append("<p>posiciones de las reinas(pieza de ajedrez)</p><ul>");
+                    $.each(response.soluciones, function(i, item) {
+                        $("#graficas").append("<li>Solucion "+i+": "+ item+"</li>"); 
+                    });
+                    $("#graficas").append("</ul>");
+                } 
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+    });
+</script>
