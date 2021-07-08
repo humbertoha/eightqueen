@@ -13,7 +13,10 @@ Example of solution puzzles eight queen problem.
 To run:
 
 ```
+$ git clone https://github.com/humbertoha/eightqueen.git --config core.autocrlf=input
+$ cd eightqueen
 $ docker-compose up -d --build
+
 ```
 
 Look 127.0.0.1:5000
@@ -37,6 +40,7 @@ nq = number of queen
 Postgresql access
 
 ```
-$ docker-compose exec db psql --username=cuenca --dbname=reinasporocho
+$ exit
+
 ```
 
