@@ -25,7 +25,7 @@ def cliqueen(nq):
     nq = int(nq)
     if(nq>=4):
         output = eightqueen.eightqueen(nq)
-        print("Tablero :"+nq+" x "+nq+"\nTotal campos:"+(int(nq)*int(nq))+"\n")
+        print("Tablero :"+str(nq)+" x "+str(nq)+"\nTotal campos:"+str(int(nq)*int(nq))+"\n")
         print("numero de reinas(piezas de ajedrez): "+ str(nq)+"\n") 
         print("numero de soluciones: "+ str(len(output.solutions))+"\n")
         count = db.session.query(peticiones).filter(peticiones.numeroreinas == int(nq)).count()
