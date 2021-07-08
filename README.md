@@ -40,7 +40,7 @@ nq = number of queen
 Postgresql access
 
 ```
-$ exit
+$ docker-compose exec db psql --username=cuenca --dbname=reinasporocho
 
 ```
 
